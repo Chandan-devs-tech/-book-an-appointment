@@ -1,0 +1,274 @@
+{
+   "openapi": "3.0.1",
+  "info": {
+    "title": "Drive Easy API Documentation",
+    "version": "v1",
+    "description": "API description here",
+    "termsOfService": "https://your-terms-of-service-url.com",
+    "contact": {
+      "name": "Your Name",
+      "email": "your.email@example.com",
+      "url": "https://your-website-url.com"
+    },
+    "license": {
+      "name": "Your License",
+      "url": "https://your-license-url.com"
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": ["fullname", "uername"]
+      },
+      "Car": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "year": {
+            "type": "integer"
+          },
+          "price": {
+            "type": "integer"
+          },
+          "image": {
+            "type": "string"
+          }
+        },
+        "required": ["name", "model", "year", "price", "image"]
+      },
+      "Reservation": {
+        "type": "object",
+        "properties": {
+          "car_id": {
+            "type": "integer"
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "required": ["car_id", "start_date", "end_date"]
+      }
+    }
+  },
+  "paths": {
+    "/v1/login": {
+      "post": {
+        "summary": "User login",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User logged in successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/v1/register": {
+      "post": {
+        "summary": "User registration",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User registered successfully"
+          },
+          "422": {
+            "description": "Invalid registration data"
+          }
+        }
+      }
+    },
+     "/v1/cars": {
+      "get": {
+        "summary": "Retrieve all cars",
+        "tags": ["Cars"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Cars retrieved successfully"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a car",
+        "tags": ["Cars"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Car"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Car created successfully"
+          },
+          "422": {
+            "description": "Invalid car data"
+          }
+        }
+      }
+    },
+    "/v1/cars/{id}": {
+      "get": {
+        "summary": "Retrieve a specific car",
+        "tags": ["Cars"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Car retrieved successfully"
+          },
+          "404": {
+            "description": "Car not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a specific car",
+        "tags": ["Cars"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Car deleted successfully"
+          },
+          "404": {
+            "description": "Car not found"
+          }
+        }
+      }
+    },
+     "/v1/reservations": {
+      "get": {
+        "summary": "Retrieve all reservations",
+        "tags": ["Reservations"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Reservations retrieved successfully"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a reservation",
+        "tags": ["Reservations"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Reservation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Reservation created successfully"
+          },
+          "422": {
+            "description": "Invalid reservation data"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a specific reservation",
+        "tags": ["Reservations"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Reservation deleted successfully"
+          },
+          "404": {
+            "description": "Reservation not found"
+          }
+        }
+      }
+    }
+  },
+  
+}
