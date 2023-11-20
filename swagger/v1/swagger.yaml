@@ -70,7 +70,7 @@
     }
   },
   "paths": {
-    "/v1/login": {
+    "/api/v1/login": {
       "post": {
         "summary": "User login",
         "tags": ["Users"],
@@ -80,10 +80,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "username": {
-                    "type": "string"
-                  },
-                  "password": {
+                  "name": {
                     "type": "string"
                   }
                 },
@@ -102,7 +99,7 @@
         }
       }
     },
-    "/v1/register": {
+    "/api/v1/register": {
       "post": {
         "summary": "User registration",
         "tags": ["Users"],
@@ -112,10 +109,10 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "username": {
+                  "name": {
                     "type": "string"
                   },
-                  "password": {
+                  "full_name": {
                     "type": "string"
                   }
                 },
