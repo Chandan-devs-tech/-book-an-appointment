@@ -27,7 +27,7 @@
             "type": "string"
           }
         },
-        "required": ["fullname", "uername"]
+        "required": ["fullname", "name"]
       },
       "Car": {
         "type": "object",
@@ -38,22 +38,34 @@
           "model": {
             "type": "string"
           },
-          "year": {
-            "type": "integer"
-          },
-          "price": {
-            "type": "integer"
-          },
-          "image": {
+          "description": {
             "type": "string"
+          },
+          "img": {
+            "string": "integer"
+          },
+          "total_amount": {
+            "type": "integer"
+          },
+           "finance_fee": {
+            "type": "integer"
+          },
+          "duration": {
+            "type": "integer"
+          },
+          "user_id": {
+            "type": "integer"
           }
         },
-        "required": ["name", "model", "year", "price", "image"]
+        "required": ["name", "model", "description", "img", "total_amount", "finance_fee", "duration", "user_id"]
       },
       "Reservation": {
         "type": "object",
         "properties": {
           "car_id": {
+            "type": "integer"
+          },
+          "user_id": {
             "type": "integer"
           },
           "start_date": {
@@ -65,7 +77,7 @@
             "format": "date"
           }
         },
-        "required": ["car_id", "start_date", "end_date"]
+        "required": ["car_id", "user_id", "start_date", "end_date"]
       }
     }
   },
@@ -131,7 +143,7 @@
         }
       }
     },
-     "/v1/cars": {
+     "/api/v1/cars": {
       "get": {
         "summary": "Retrieve all cars",
         "tags": ["Cars"],
@@ -164,7 +176,7 @@
         }
       }
     },
-    "/v1/cars/{id}": {
+    "/api/v1/cars/{id}": {
       "get": {
         "summary": "Retrieve a specific car",
         "tags": ["Cars"],
@@ -211,7 +223,7 @@
         }
       }
     },
-     "/v1/reservations": {
+     "/api/v1/reservations": {
       "get": {
         "summary": "Retrieve all reservations",
         "tags": ["Reservations"],
@@ -242,7 +254,9 @@
             "description": "Invalid reservation data"
           }
         }
-      },
+      }
+    },
+    "/api/v1/reservations{id}": {
       "delete": {
         "summary": "Delete a specific reservation",
         "tags": ["Reservations"],
@@ -265,7 +279,7 @@
           }
         }
       }
-    }
+    },
   },
   
 }
